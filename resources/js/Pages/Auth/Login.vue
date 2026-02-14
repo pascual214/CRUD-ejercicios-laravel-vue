@@ -7,6 +7,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
+const emit = defineEmits(['close']);
+
 defineProps({
     canResetPassword: {
         type: Boolean,
@@ -24,20 +26,17 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+        onSuccess:()=>{
+          form.reset('password')
+          emit("close");
+        }
     });
 };
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Log in" />
 
-        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
-            {{ status }}
-        </div>
-
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" class="p-3">
             <div>
                 <InputLabel for="email" value="Email" />
 
@@ -96,5 +95,4 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
-    </GuestLayout>
 </template>
