@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -8,9 +9,7 @@ use Inertia\Inertia;
 
 Route::get("crono", fn()=> Inertia::render('Cronometro'))->name('crono');
 
-Route::get('/', function () {
-    return Inertia::render('Main');
-})->name('main');
+Route::get('/', MainController::class)->name('main');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -25,7 +24,7 @@ Route::middleware('auth')->group(function () {
 //Añade todas las rutas de exercise
 Route::resource("exercises", ExerciseController::class);
 
-Route::get("entrenadores", [UserController::class, "getEntrenadores"])->name("entrenadores.index");
-Route::get("usuarios", [UserController::class, "getUsuarios"])->name("usuarios.index");
+Route::get("entrenador", [UserController::class, "getEntrenador"])->name("entrenador.index");
+Route::get("usuario", [UserController::class, "getUsuario"])->name("usuario.index");
 
 require __DIR__.'/auth.php';

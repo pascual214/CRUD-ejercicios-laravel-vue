@@ -14,7 +14,9 @@ const emit = defineEmits(['open-modal'])
 <template>
   <div class="navbar bg-base-100 shadow-sm">
     <div class="flex-1 ml-6">
-      <img src="images/HoopLab_recortada.png" alt="Logo" class="h-16">
+      <Link href="/">
+        <img src="images/HoopLab_recortada.png" alt="Logo" class="h-16">
+      </Link>
     </div>
     <div class="flex gap-4">
 

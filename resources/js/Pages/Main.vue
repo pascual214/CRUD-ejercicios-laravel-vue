@@ -5,9 +5,12 @@ import {Link, usePage} from "@inertiajs/vue3";
 import {computed, ref} from "vue";
 import Modal from "../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Components/Modal.vue";
 import Login from "../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Pages/Auth/Login.vue";
+import CardOption from "@/Pages/Exercises/CardOption.vue";
 
 // Recomendado usar computed
 const user = computed(() => usePage().props.auth.user);
+const props = defineProps({CardOption: Object});
+
 const showLogin = ref(false);
 
 </script>
@@ -16,82 +19,19 @@ const showLogin = ref(false);
   <Layout @open-modal="showLogin=true">
 
     <!-- Si el usuario está autenticado -->
-    <div v-if="user">
-      <h2 class="mb-6 px-6 text-3xl font-bold">
+    <div v-if="user" class="mt-10 mb-10">
+      <h2 class="mb-6 px-6 text-3xl font-bold text-center">
         Funcionalidades del proyecto
       </h2>
-      <div class="grid gap-6 px-6 sm:grid-cols-3">
-        <div class="card bg-base-100 w-96 shadow-sm">
-          <figure class="px-10 pt-10">
-            <img
-                src="images/cronometro.avif"
-                alt="Shoes"
-                class="rounded-xl h-40"/>
-          </figure>
-          <div class="card-body items-center text-center">
-            <h2 class="card-title">Cronometro</h2>
-            <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-            <div class="card-actions">
-              <Link href="crono">
-                <button class="btn btn-primary">Empezar</button>
-              </Link>
-            </div>
-          </div>
-        </div>
+      <div class="grid gap-6 px-6 sm:grid-cols-3 justify-items-center">
 
-        <div class="card bg-base-100 w-96 shadow-sm">
-          <figure class="px-10 pt-10">
-            <img
-                src="images/entrenamiento-baloncesto.jpg"
-                alt="Shoes"
-                class="rounded-xl"/>
-          </figure>
-          <div class="card-body items-center text-center">
-            <h2 class="card-title">Ejercicios</h2>
-            <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-            <div class="card-actions">
-              <Link href="/exercises" as="button" class="btn btn-primary">
-                Empezar
-              </Link>
-            </div>
-          </div>
-        </div>
+        <CardOption v-for="card in props.CardOption" :key="card.title"
+                    :title="card.title"
+                    :description="card.description"
+                    :action="card.action"
+                    :img="card.img"
+        />
 
-        <div class="card bg-base-100 w-96 shadow-sm">
-          <figure class="px-10 pt-10">
-            <img
-                src="images/usuario_logo.jpg"
-                alt="Shoes"
-                class="rounded-xl h-40"/>
-          </figure>
-          <div class="card-body items-center text-center">
-            <h2 class="card-title">Usuarios</h2>
-            <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-            <div class="card-actions">
-              <Link href="/exercises" as="button" class="btn btn-primary">
-                Empezar
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div class="card bg-base-100 w-96 shadow-sm">
-          <figure class="px-10 pt-10">
-            <img
-                src="images/entrenamiento-baloncesto.jpg"
-                alt="Shoes"
-                class="rounded-xl"/>
-          </figure>
-          <div class="card-body items-center text-center">
-            <h2 class="card-title">Entrenadores</h2>
-            <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-            <div class="card-actions">
-              <Link href="/exercises" as="button" class="btn btn-primary">
-                Empezar
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -100,7 +40,7 @@ const showLogin = ref(false);
     <div v-else>
       <div
           class="hero min-h-screen"
-          style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp);"
+          style="background-image: url('/images/pizarra.png');"
       >
         <div class="hero-overlay"></div>
         <div class="hero-content text-neutral-content text-center">
