@@ -1,5 +1,6 @@
 <script setup>
 import Swal from 'sweetalert2';
+import {Link, router} from "@inertiajs/vue3";
 
 const props = defineProps({
   exercise: Object,
@@ -8,7 +9,7 @@ const props = defineProps({
 function confirmarBorrado(e) {
   e.preventDefault() // Evita el envío automático
   const button = e.currentTarget;
-  const form = button.closest("form");
+  button.closest("form");
 
   Swal.fire({
     title: "¿Estás seguro?",
@@ -20,7 +21,11 @@ function confirmarBorrado(e) {
       cancelButtonText: "Cancelar",
 }).then((result) => {
     if (result.isConfirmed) {
-      form.submit(); // Solo se envía si se confirma el borrado
+      router.delete(route('exercises.destroy', props.exercise.id), {
+        onSuccess: () => {
+          Swal.fire("Borrado!", "El ejercicio ha sido eliminado.", "success");
+        },
+      });
     }
   });
 }
@@ -35,9 +40,10 @@ function confirmarBorrado(e) {
       <p>Tiempo del ejercicio: <strong>{{ exercise.time }} min</strong></p>
       <p>Tipo de ejercicio: <strong>{{ exercise.type }}</strong></p>
       <div class="justify-end card-actions">
-        <a :href="`/exercises/${exercise.id}/edit?page=${page}`">
-          <button class="btn btn-primary">Editar</button>
-        </a>
+        <Link :href="route('exercises.edit', exercise.id)" class="btn btn-primary">
+          Editar
+        </Link>
+
         <button @click="confirmarBorrado" class="btn btn-secondary bg-red-600 border-red-700">
           Borrar
         </button>

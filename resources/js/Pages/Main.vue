@@ -6,17 +6,23 @@ import {computed, ref} from "vue";
 import Modal from "../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Components/Modal.vue";
 import Login from "../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Pages/Auth/Login.vue";
 import CardOption from "@/Pages/Exercises/CardOption.vue";
+import Register from "../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Pages/Auth/Register.vue";
 
 // Recomendado usar computed
 const user = computed(() => usePage().props.auth.user);
 const props = defineProps({CardOption: Object});
 
-const showLogin = ref(false);
+
+const activeModal = ref<'login' | 'register' | null>(null)
+
+function openModal(type: 'login' | 'register') {
+  activeModal.value = type
+}
 
 </script>
 
 <template>
-  <Layout @open-modal="showLogin=true">
+  <Layout @open-modal="openModal">
 
     <!-- Si el usuario está autenticado -->
     <div v-if="user" class="mt-10 mb-10">
@@ -56,11 +62,16 @@ const showLogin = ref(false);
       </div>
     </div>
 
-    <Modal :show="showLogin" @close="showLogin=false">
+    <Modal :show="activeModal === 'login'" @close="activeModal = null">
       <Login />
     </Modal>
 
+    <Modal :show="activeModal === 'register'" @close="activeModal = null">
+      <Register />
+    </Modal>
+
   </Layout>
+
 </template>
 
 <style scoped>

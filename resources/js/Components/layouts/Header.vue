@@ -15,7 +15,7 @@ const emit = defineEmits(['open-modal'])
   <div class="navbar bg-base-100 shadow-sm">
     <div class="flex-1 ml-6">
       <Link href="/">
-        <img src="images/HoopLab_recortada.png" alt="Logo" class="h-16">
+        <img src="/images/HoopLab_recortada.png" alt="Logo" class="h-16">
       </Link>
     </div>
     <div class="flex gap-4">
@@ -48,21 +48,25 @@ const emit = defineEmits(['open-modal'])
               </a>
             </li>
             <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
+            <li>
+            <Link href="logout" method="post" as="button">
+                Logout
+            </Link>
+            </li>
           </ul>
         </div>
       </div>
 
       <!-- Si no estoy autenticado -->
       <div v-else class="flex gap-4 mr-6">
-        <Link href="register">
-          <button class="btn btn-outline btn-primary">
+
+          <button class="btn btn-outline btn-primary" @click="emit('open-modal', 'register')">
             Registrarse
           </button>
-        </Link>
 
 
-          <button class="btn btn-primary" @click="emit('open-modal')">
+
+          <button class="btn btn-primary" @click="emit('open-modal', 'login')">
             Iniciar sesión
           </button>
 

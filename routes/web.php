@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -21,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Añade todas las rutas de exercise
+//Añade todas las rutas de exercises
 Route::resource("exercises", ExerciseController::class);
 
 Route::get("entrenador", [UserController::class, "getEntrenador"])->name("entrenador.index");

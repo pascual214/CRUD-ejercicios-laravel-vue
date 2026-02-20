@@ -17,13 +17,13 @@ class MainController extends Controller
                 'title' => 'Usuario',
                 'description' => 'Mostrar todos los usuarios',
                 'img' => '/images/usuario_logo.jpg',
-                'action' => '/usuarios'
+                'action' => '/usuario'
             ],
             "Entrenador" => [
                 'title' => 'Entrenador',
                 'description' => 'Mostrar todos los entrenadores',
                 'img' => '/images/usuario_logo.jpg',
-                'action' => '/entrenadores'
+                'action' => '/entrenador'
             ],
             "Ejercicios" => [
                 'title' => 'Ejercicios',

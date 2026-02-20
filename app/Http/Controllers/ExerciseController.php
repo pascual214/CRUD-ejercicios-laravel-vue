@@ -26,6 +26,8 @@ class ExerciseController extends Controller
      */
     public function create()
     {
+        return Inertia::render("Exercises/Create");
+
         //
     }
 
@@ -34,6 +36,10 @@ class ExerciseController extends Controller
      */
     public function store(StoreExerciseRequest $request)
     {
+        Exercise::create($request->validated());
+
+        // Redirige a la lista de ejercicios con Inertia
+        return redirect()->route('exercises.index');
         //
     }
 
@@ -50,6 +56,9 @@ class ExerciseController extends Controller
      */
     public function edit(Exercise $exercise)
     {
+        return Inertia::render('Exercises/Edit', [
+            'exercise' => $exercise,
+        ]);
         //
     }
 
@@ -58,14 +67,19 @@ class ExerciseController extends Controller
      */
     public function update(UpdateExerciseRequest $request, Exercise $exercise)
     {
+        $exercise->update($request->input());
+        return redirect()->route("exercises.index");
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Exercise $exercise)
+    public function destroy(int $id)
     {
+        $exercise = Exercise::findOrFail($id);
+        $exercise->delete();
+        return back();
         //
     }
 }

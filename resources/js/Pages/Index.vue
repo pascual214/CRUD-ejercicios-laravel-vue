@@ -22,8 +22,12 @@ console.log("exercises.links", props.exercises.links);
 
 <template>
   <Layout>
-    <div class="card bg-blue-100 p-6">
-      <div class="flex flex-wrap gap-6 justify-center">
+    <div class="card bg-blue-100 p-6 flex flex-col items-center">
+      <Link as="button" :href="route('exercises.create')" class="btn btn-primary w-52 mb-6">
+        Crear ejercicio
+      </Link>
+
+    <div class="flex flex-wrap gap-6 justify-center">
         <Card
             v-for="exercise in exercises.data"
             :key="exercise.id"

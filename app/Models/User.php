@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +22,13 @@ class User extends Authenticatable
         'email',
         'password'
     ];
+    public static function fieldLabels(){
+        return [
+            "name" =>"Nombre",
+            "email"=> "Correo",
+            "password" =>"Contraseña",
+        ];
+    }
 
     /**
      * The attributes that should be hidden for serialization.

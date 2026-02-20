@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Exercise;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use function Symfony\Component\Translation\t;
 
 class ExercisePolicy
 {
@@ -13,7 +14,7 @@ class ExercisePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +22,7 @@ class ExercisePolicy
      */
     public function view(User $user, Exercise $exercise): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +30,7 @@ class ExercisePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +38,7 @@ class ExercisePolicy
      */
     public function update(User $user, Exercise $exercise): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,7 +46,7 @@ class ExercisePolicy
      */
     public function delete(User $user, Exercise $exercise): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -53,7 +54,7 @@ class ExercisePolicy
      */
     public function restore(User $user, Exercise $exercise): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -61,6 +62,6 @@ class ExercisePolicy
      */
     public function forceDelete(User $user, Exercise $exercise): bool
     {
-        return false;
+        return true;
     }
 }
